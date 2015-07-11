@@ -1,9 +1,15 @@
 var img = document.createElement('img');
 img.setAttribute('src', 'images/dogs.jpg')
 
+console.log(img);
+
+
+var imgTest = document.getElementById("test");
+console.log(imgTest);
+
 
 $("#test").load(function() {
-    var vibrant = new Vibrant(img);
+    var vibrant = new Vibrant(imgTest);
     var swatches = vibrant.swatches();
     console.log(swatches);
     /*for (swatch in swatches)
@@ -30,17 +36,19 @@ var fileextension = ".jpg";
 $.ajax({
     url: dir,
     success: function (data) {
+
         //List all png file names in the page
         $(data).find("a:contains(" + fileextension + ")").each(function () {
+        	
             var filename = this.href.replace(window.location, "").replace("http:///", "");
-            //var testImg = document.createElement('img');
-            //testImg.setAttribute('src', 'dir + filename');
-            var testImage = $("body").append($("<img src=" + dir + filename + "></img>"));
-            console.log(testImage);
+            $("body").append($("<img id='" + filename + "'" +"src=" + dir + filename + "></img>"));
 
-            //var vibrant = new Vibrant(testImg);
-            //var swatches = vibrant.swatches();
-            //console.log(swatches);
+            var imgSelector = document.getElementById(filename);
+
+
+            var vibrantTest = new Vibrant(imgSelector);
+            var swatchesTest = vibrantTest.swatches();
+            console.log(swatchesTest.Vibrant.getHex());
 
         });
     }

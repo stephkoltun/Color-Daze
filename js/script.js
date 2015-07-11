@@ -7,23 +7,23 @@ console.log(img);
 var imgTest = document.getElementById("test");
 console.log(imgTest);
 
-
+/*
 $("#test").load(function() {
-    var vibrant = new Vibrant(imgTest);
-    var swatches = vibrant.swatches();
-    console.log(swatches);
-    /*for (swatch in swatches)
+    //var vibrant = new Vibrant(imgTest);
+    //var swatches = vibrant.swatches();
+    //console.log(swatches);
+    for (swatch in swatches)
         if (swatches.hasOwnProperty(swatch) && swatches[swatch])
             //console.log(swatch, swatches[swatch].getHex());
         	console.log(swatch);
         $("body").append("<div class='box'><div>");
-        $(".box").css("background-color", "black");*/
+        $(".box").css("background-color", "black");
     //console.log(swatches.Vibrant.getHex());
     var useColor = swatches.Vibrant.getHex();
     console.log(useColor);
     $("#testzone").append("<div class='box'><div>");
         $(".box").css("background-color", useColor);
-});
+});*/
 
 
 
@@ -46,9 +46,13 @@ $.ajax({
             var imgSelector = document.getElementById(filename);
 
 
-            var vibrantTest = new Vibrant(imgSelector);
-            var swatchesTest = vibrantTest.swatches();
-            console.log(swatchesTest.Vibrant.getHex());
+            var vibrant = new Vibrant(imgSelector);
+            var swatches = vibrant.swatches();
+            var dominantColor = swatches.Vibrant.getHex();
+        	var boxID = filename + "ID";
+
+            var box = $("#testzone").append("<div class='box' id='" + boxID + "'><div>");
+        	box.css("background-color", dominantColor);
 
         });
     }

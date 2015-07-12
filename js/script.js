@@ -20,8 +20,13 @@ function generateColorBar(dir, id, date, loc, city) {
 
             //List all png file names in the page
             $(data).find("a:contains(" + fileextension + ")").each(function () {
-                
-                var filename = this.href.replace(window.location, "").replace("http:///", "");
+
+
+                // for MAMP server
+                //var filename = this.href.replace(window.location, "").replace("http:///", "");
+
+                // for live site
+                var filename = this.href.replace(window.location.host, "").replace("http:///colordaze/", "");
                 var counter = filename.substring(5,6);
 
                 // load image

@@ -589,31 +589,43 @@ p a:link, a:visited {
 	clear: both;
 	text-align: center;
 	margin: 0 auto;
-	overflow: auto;
+
+	max-width: 800px;
 }
 
 .dayBar {
-	overflow: auto;
+	float: left;
+	padding-right: 30px;
 }
 
 .imageWrapper {
 	position: relative;
 	float: left;
+	width: 40px;
+	padding-bottom: 20px;
 }
+
 
 .barImage {
-	height: 200px;
-	opacity: .5;
+	height: 150px;
+
+	z-index: 0;
+	visibility: hidden
 }
 
 
+.imageWrapper:hover .barImage {
+	visibility: visible;
+}
 
 .box {
-	width: 60px;
-	height: 100px;
-	overflow: auto;
-
-
+	z-index: 100;
+	height: 150px;
+	width: inherit;
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
 /* ------------- ABOUT ------------------*/

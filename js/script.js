@@ -1,7 +1,9 @@
 
 
 
-function generateColorBar(dir, id) {
+
+function generateColorBar(dir, id, date, loc, city) {
+    console.log("function called")
 
     var fileextension = ".jpg";
 
@@ -9,7 +11,11 @@ function generateColorBar(dir, id) {
         url: dir,
         success: function (data) {
 
-            $("#" + id).append("<h3>October 12, 2012</h3><p>64.1750&deg N, 51.7389&deg W<br>Nuuk, Greenland</p>");
+            $("#bars").prepend("<section id='" + id + "' class='dayBar'></section>");
+
+           //$("#" + id).append("<h3>" + date + "</h3><p>" + loc + "<br>" + city + "</p>");
+
+           $("#" + id).append("<div class='info'><h3>" + date + "</h3><p>" + loc + "<br>" + city + "</p></div>");
 
 
             //List all png file names in the page
@@ -44,6 +50,12 @@ function generateColorBar(dir, id) {
         }
     });
 }
+
+
+
+
+
+
 
 
 

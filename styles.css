@@ -580,35 +580,34 @@ p a:link, a:visited {
 
 
 
-
+.info {
+	float: left;
+	text-align: left;
+	width: 200px;
+}
 
 
 
 
 #bars {
 	clear: both;
-	text-align: center;
-	margin: 0 auto;
-
-	max-width: 800px;
 }
 
 .dayBar {
-	float: left;
-	padding-right: 30px;
+	clear: both;
+	padding: 20 0 20 0;
 }
 
 .imageWrapper {
 	position: relative;
 	float: left;
 	width: 40px;
-	padding-bottom: 20px;
+	height: 125px;
 }
 
 
 .barImage {
-	height: 150px;
-
+	height: inherit;
 	z-index: 0;
 	visibility: hidden
 }
@@ -616,11 +615,16 @@ p a:link, a:visited {
 
 .imageWrapper:hover .barImage {
 	visibility: visible;
+	z-index: 200;
+	position: absolute;
 }
+
+
+
 
 .box {
 	z-index: 100;
-	height: 150px;
+	height: inherit;
 	width: inherit;
 	display: inline-block;
 	position: absolute;

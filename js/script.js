@@ -3,49 +3,64 @@
 
 
 
+function generateColorBar(dir, id) {
 
-var dir = "images/20131207/";
-var fileextension = ".jpg";
+    var fileextension = ".jpg";
 
-$.ajax({
-    url: dir,
-    success: function (data) {
+    $.ajax({
+        url: dir,
+        success: function (data) {
 
-        //List all png file names in the page
-        $(data).find("a:contains(" + fileextension + ")").each(function () {
-        	
-            var filename = this.href.replace(window.location, "").replace("http:///", "");
-            $("body").append($("<img id='" + filename.substring(5,6) + "'" +"src=" + dir + filename + "></img>"));
-        });
+            //List all png file names in the page
+            $(data).find("a:contains(" + fileextension + ")").each(function () {
+                
+                var filename = this.href.replace(window.location, "").replace("http:///", "");
+                var counter = filename.substring(5,6);
+
+                // add wrapper and image
+                $("#" + id).prepend("<div class='imageWrapper' id='moment" + counter + "'><img class='barImage' id='image" + counter + "'" +"src=" + dir + filename + "></img>");
+            });
+            addColor(id);
+        }
+
+    }); // end ajax request
+
+}
+
+
+
+
+
+function addColor(id) {
+    console.log("ajax complete! color processing begin!");
+
+    var images = $("#" + id + " img");
+    var wrappers = $("#" + id + " div");
+
+    for (i = 0; i < images.length; i++) {
+
+        var currentImageID = images[i].id;
+        var currentImage = document.getElementById(currentImageID);
+
+        var currentWrapperID = wrappers[i].id;
+        var currentWrapper = document.getElementById(currentWrapperID);
+
+        var vibrant = new Vibrant(currentImage);
+        var swatches = vibrant.swatches();
+        var dominantColor = swatches.Vibrant.getHex();
+
+
+
+
+        // add div with dominant color
+        $(currentWrapper).prepend("<div class='box' id='box" + (i+1) + "'></div>");
+
+        $("#box" + (i+1)).css("background-color", dominantColor);
     }
-});
+}
 
 
 
-
-
-$( document ).ajaxComplete(function() {
-	console.log("ajax complete!");
-
-
-    for (i = 0; i < document.images.length; i++) {
-    		//var idSelector = idList[i];
-    		//console.log(idSelector);
-    		var imageSelector = document.images[i].id;
-
-    		var image = document.getElementById(imageSelector);
-    		console.log(image);
-
-    		var vibrant = new Vibrant(image);
-    		var swatches = vibrant.swatches();
-    		var dominantColor = swatches.Vibrant.getHex();
-    		console.log(dominantColor);
-
-    		$("body").append("<div class='box' id='box" + imageSelector + "'><div>");
-    		$("#box" + imageSelector).css("background-color", dominantColor);
-
-    	}
-});
 
 
 

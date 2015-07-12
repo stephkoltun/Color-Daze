@@ -1,18 +1,8 @@
 
-
-
-
-
-
-
-
-
 body {
 	font-family: arial, sans-serif;
-	margin: 0;
+	margin: 50 80 10 80;
 	padding: 0;
-
-	
 }
 
 p {
@@ -66,7 +56,7 @@ p a:link, a:visited {
 }
 
 
-/* LANDING PAGE */
+/*
 
 #landing {
 	margin: 0 auto;
@@ -92,14 +82,14 @@ p a:link, a:visited {
 
 
 
-/* COLOR BAR */
+
 #s1, #s2, #s3 {
 	height: 98%;
 	overflow-y:hidden;
 	overflow-x: scroll;
 	white-space: nowrap;
 
-	/*fix the white space between inline elements*/
+	//fix the white space between inline elements
 	font-size: 0;
 }
 
@@ -107,7 +97,7 @@ p a:link, a:visited {
 	height: 100%;
 }
 
-	/*used inline elements so that they can overflow the container width*/
+	//used inline elements so that they can overflow the container width
 .bar {
 	height: inherit;
 	display: inline-block;
@@ -146,9 +136,9 @@ p a:link, a:visited {
 }
 
 
-/* -------- SET 1 --------- */
+/* -------- SET 1 --------- 
 
-/* Specifications for each bar */
+// Specifications for each bar 
 #s1-one {
 	background-color: rgb(179,165,158);
 	width: 10%;
@@ -293,9 +283,9 @@ p a:link, a:visited {
 
 
 
-/* -------- SET 2 --------- */
+/* -------- SET 2 --------- 
 
-/* Specifications for each bar */
+// Specifications for each bar 
 #s2-one {
 	background-color: rgb(156,111,89);
 	width: 8.33%;
@@ -467,9 +457,9 @@ p a:link, a:visited {
 
 
 
-/* -------- SET 3 --------- */
+/* -------- SET 3 --------- 
 
-/* Specifications for each bar */
+// Specifications for each bar 
 #s3-one {
 	background-color: rgb(211, 218, 227);
 	width: 20%;
@@ -545,26 +535,7 @@ p a:link, a:visited {
 
 
 
-/* ------------- ABOUT ------------------*/
 
-header {
-	text-align: center;
-	padding: 50px 0 50px 0;
-}
-
-header h1 {
-	font-size: 20px;
-}
-
-header h2 {
-	font-size: 16px;
-	font-weight: normal;
-}
-
-h3 {
-	font-size: 12px;
-	font-weight: bold;
-}
 
 
 #sets {
@@ -596,13 +567,84 @@ h3 {
 
 #sets a:hover {
 	text-decoration: underline;
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#bars {
+	clear: both;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.dayBar {
+	overflow: auto;
+}
+
+.imageWrapper {
+	position: relative;
+	float: left;
+}
+
+.barImage {
+	height: 200px;
+	z-index: 0;
+	opacity: .5;
+}
+
+
+
+.box {
+	width: 60px;
+	height: 200px;
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	z-index: 100;
+}
+
+/* ------------- ABOUT ------------------*/
+
+
+
+#title {
+	text-align: left;
+	float: left;
+	width: 50%;
+	height: 150px;
+}
+
+#title h1 {
+	font-size: 22px;
+}
+
+#title h2 {
+	font-size: 16px;
+	font-weight: normal;
 }
 
 
 #about {
-	text-align: center;
-	max-width: 370px;
-	margin: auto;
+	text-align: right;
+	float: right;
+	width: 50%;
+	max-width: 500px;
+	height: 150px;
 }
 
 #about a {
@@ -616,39 +658,9 @@ h3 {
 
 
 
-
-
-
-
-img {
-	width: 200px;
-}
-
-
-#testzone {
-	position: relative;
-}
-
-
-
-.box {
-	width: 100px;
-	height: 100px;
-
-
-	z-index: 100;
-
-}
-
-
-
-#testzone img {
-	width: 200px;
-	position: absolute;
-	top: 0;
-	left: 0;
-
-	z-index: 0;
+h3 {
+	font-size: 12px;
+	font-weight: bold;
 }
 
 

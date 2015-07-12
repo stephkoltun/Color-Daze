@@ -8,23 +8,43 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<!-- CDN Jquery UI -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+		<script src="js/script.js">
+		</script>
+
 	</head>
 
 	<body>
-		<header>
-			<h1>COLORDAZE</h1>
-			<h2>Each day, colorized.</h2>
-		</header>
+			<section id="title">
+				<h1>COLORDAZE</h1>
+				<h2>Each day, colorized.</h2>
+			</section>
+
+			<section id="about">
+				<p>Colordaze reduces a single day to its color palette. Each image from the selected day is represented by its dominant color. When seen together, the color spectrum of the day is evident. This is a side project by <a href="http://anothersideproject.co">Stephanie Koltun.</a></p>
+				<p class="credit">The site uses personal images from my travels and Jari Zwarts' <a href="http://jariz.github.io/vibrant.js/">Vibrant</a> javascript library.
+			</section>
 
 	
-
-		<section id="about">
-			<p>Colordaze reduces a single day to its color palette. Each image from the selected day is represented by its dominant color. When seen together, the color spectrum of the day is evident.</p>
-			<p class="credit">The site uses personal images from my travels and Brian Gonzalez' <a href="https://github.com/briangonzalez/rgbaster.js">RGBaster</a> javascript library.<br><br>
-			This is a side project by <a href="http://anothersideproject.co">Stephanie Koltun.</a></p>
+		<section id="bars">
+			<section id="20140927" class="dayBar">
+			</section>
+			<section id="20131207" class="dayBar">
+			</section>
 		</section>
 
-		<script src="js/script.js"></script>
+		<script type="text/javascript">
+			generateColorBar("images/20140927/", "20140927");
+			
+
+			generateColorBar ("images/20131207/", "20131207");
+		</script>
+		
+
+		
+
+
+
 
 	</body>
 </html>

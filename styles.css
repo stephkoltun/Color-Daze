@@ -589,6 +589,7 @@ p a:link, a:visited {
 	clear: both;
 	text-align: center;
 	margin: 0 auto;
+	overflow: auto;
 }
 
 .dayBar {
@@ -602,7 +603,6 @@ p a:link, a:visited {
 
 .barImage {
 	height: 200px;
-	z-index: 0;
 	opacity: .5;
 }
 
@@ -610,12 +610,10 @@ p a:link, a:visited {
 
 .box {
 	width: 60px;
-	height: 200px;
-	position: absolute;
-	top: 0;
-	left: 0;
+	height: 100px;
+	overflow: auto;
 
-	z-index: 100;
+
 }
 
 /* ------------- ABOUT ------------------*/

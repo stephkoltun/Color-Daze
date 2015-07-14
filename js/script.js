@@ -23,10 +23,11 @@ function generateColorBar(dir, id, date, loc, city) {
 
 
                 // for MAMP server
-                //var filename = this.href.replace(window.location, "").replace("http:///", "");
+                var filename = this.href.replace(window.location, "").replace("http:///", "");
 
                 // for live site
-                var filename = this.href.replace(window.location.host, "").replace("http:///colordaze/", "");
+                //var filename = this.href.replace(window.location.host, "").replace("http:///colordaze/", "");
+                
                 var counter = filename.substring(5,6);
 
                 // load image
@@ -45,7 +46,22 @@ function generateColorBar(dir, id, date, loc, city) {
                     // get color data
                     var vibrant = new Vibrant(img, 60, 5);
                     var swatches = vibrant.swatches();
-                    var dominantColor = swatches.Vibrant.getHex();
+
+                    // use random number to pick from swatches
+                    if (counter%2 == 0) {
+                        
+                        var dominantColor = swatches.Vibrant.getHex();
+                        console.log("vibrant: " + dominantColor);
+
+                    } else {
+                        
+                        var dominantColor = swatches.LightVibrant.getHex();
+                        console.log("light: " + dominantColor);
+
+                    }
+
+                    //var dominantColor = swatches.Vibrant.getHex();
+
 
                     // add color to div
                     $("#box" + id + counter).css("background-color", dominantColor);

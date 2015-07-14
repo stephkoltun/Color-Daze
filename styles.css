@@ -1,7 +1,7 @@
 
 body {
 	font-family: arial, sans-serif;
-	margin: 50 80 10 80;
+	margin: 50 80 0 80;
 	padding: 0;
 }
 
@@ -73,11 +73,14 @@ header {
 .info {
 	text-align: left;
 	clear: both;
+	border-left: 1px solid #ededed;
+	padding-left: 5px;
 }
 
 .info h3 {
 	font-size: 8px;
 	font-weight: bold;
+	padding: 0;
 }
 
 .info p {
@@ -90,7 +93,7 @@ header {
 #bars {
 	clear: both;
 	overflow-x: scroll;
-	height: 80%;
+	max-height: 80%;
 }
 
 .dayBar {
@@ -102,14 +105,15 @@ header {
 	position: relative;
 	float: left;
 	width: 20px;
-	height: 90%;
+	height: 600px;
 }
 
 
 .barImage {
-	height: inherit;
+	height: 100%;
+	width: inherit;
 	z-index: 0;
-	visibility: hidden
+	visibility: hidden;
 }
 
 
@@ -117,20 +121,56 @@ header {
 	visibility: visible;
 	z-index: 200;
 	position: absolute;
-}*/
-
+	width: auto;
+}
+*/
 
 
 
 .box {
 	z-index: 100;
-	height: inherit;
+	height: 100%;
 	width: inherit;
 	display: inline-block;
 	position: absolute;
 	top: 0;
 	left: 0;
 }
+
+
+
+
+
+
+/* ----------- SCROLL BARS ----------- */
+
+::-webkit-scrollbar {
+      height: 7px;
+      width: 7px;
+} 
+
+::-webkit-scrollbar-track:horizontal, ::-webkit-scrollbar-corner {
+      background-color: #ededed;
+}
+
+
+::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.2); 
+} /* this will style the thumb, ignoring the track */
+ 
+::-webkit-scrollbar-button {
+      background-color: #7c2929;
+} 
+
+
+
+
+
+
+
+
+
+
 
 /* ------------- ABOUT ------------------*/
 

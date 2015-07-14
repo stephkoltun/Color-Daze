@@ -47,16 +47,16 @@ function generateColorBar(dir, id, date, loc, city) {
                     var vibrant = new Vibrant(img, 60, 5);
                     var swatches = vibrant.swatches();
 
-                    // use random number to pick from swatches
+                    // use even/odd to pick from swatches
                     if (counter%2 == 0) {
                         
                         var dominantColor = swatches.Vibrant.getHex();
-                        console.log("vibrant: " + dominantColor);
+                        //console.log("vibrant: " + dominantColor);
 
                     } else {
                         
                         var dominantColor = swatches.LightVibrant.getHex();
-                        console.log("light: " + dominantColor);
+                        //console.log("light: " + dominantColor);
 
                     }
 

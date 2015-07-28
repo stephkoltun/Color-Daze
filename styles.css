@@ -74,23 +74,28 @@ header {
 .info {
 	text-align: left;
 	clear: both;
-	padding: 5px;
+	margin: 20px 0 0 20px;
 	position: absolute;
 	z-index: 200;
+	width: inherit;
 }
 
 .info h3 {
-	font-size: 8px;
+	font-size: 14px;
 	font-weight: bold;
-	padding: 0;
+	padding: 0 0 5px 0;
 	color: white;
 	margin: 0;
 }
 
 .info p {
-	font-size: 8px;
+	font-size: 14px;
 	color: white;
 	margin: 0;
+}
+
+.info hr {
+	border-top: 2px solid white;
 }
 
 
@@ -105,12 +110,13 @@ header {
 .dayBar {
 	float: left;
 	display: inline;
+	opacity: 85%;
 }
 
 .imageWrapper {
 	position: relative;
 	float: left;
-	width: 30px;
+	width: 40px;
 	height: inherit;
 }
 

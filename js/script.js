@@ -11,7 +11,7 @@ function generateColorBar(dir, id, date, loc, city) {
         url: dir,
         success: function (data) {
 
-            $("#bars").prepend("<section id='" + id + "' class='dayBar'><div class='info'><h3>" + date + "</h3><p>" + loc + "</p><p>" + city + "</p></div></section>");
+            $("#bars").prepend("<section id='" + id + "' class='dayBar'><div class='info'><h3>" + date + "</h3><p>" + city + "</p><hr></div></section>");
 
            //$("#" + id).append("<div class='info'><h3>" + date + "</h3><p>" + loc + "<br>" + city + "</p></div>");
 

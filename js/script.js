@@ -11,11 +11,9 @@ function generateColorBar(dir, id, date, loc, city) {
         url: dir,
         success: function (data) {
 
-            $("#bars").prepend("<section id='" + id + "' class='dayBar'></section>");
+            $("#bars").prepend("<section id='" + id + "' class='dayBar'><div class='info'><h3>" + date + "</h3><p>" + loc + "</p><p>" + city + "</p></div></section>");
 
-           //$("#" + id).append("<h3>" + date + "</h3><p>" + loc + "<br>" + city + "</p>");
-
-           $("#" + id).append("<div class='info'><h3>" + date + "</h3><p>" + loc + "<br>" + city + "</p></div>");
+           //$("#" + id).append("<div class='info'><h3>" + date + "</h3><p>" + loc + "<br>" + city + "</p></div>");
 
 
             //List all png file names in the page

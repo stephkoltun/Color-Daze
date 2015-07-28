@@ -1,7 +1,8 @@
 
 body {
 	font-family: arial, sans-serif;
-	margin: 50 80 0 80;
+	/* margin: 50 80 0 80; */
+	margin: 0;
 	padding: 0;
 }
 
@@ -73,18 +74,23 @@ header {
 .info {
 	text-align: left;
 	clear: both;
-	border-left: 1px solid #ededed;
-	padding-left: 5px;
+	padding: 5px;
+	position: absolute;
+	z-index: 200;
 }
 
 .info h3 {
 	font-size: 8px;
 	font-weight: bold;
 	padding: 0;
+	color: white;
+	margin: 0;
 }
 
 .info p {
 	font-size: 8px;
+	color: white;
+	margin: 0;
 }
 
 
@@ -93,7 +99,7 @@ header {
 #bars {
 	clear: both;
 	overflow-x: scroll;
-	max-height: 80%;
+	height: 100%;
 }
 
 .dayBar {
@@ -104,8 +110,8 @@ header {
 .imageWrapper {
 	position: relative;
 	float: left;
-	width: 20px;
-	height: 600px;
+	width: 30px;
+	height: inherit;
 }
 
 

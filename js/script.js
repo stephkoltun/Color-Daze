@@ -1,39 +1,101 @@
-
-
-
-
-
-
 var dataSet = [];
-
-
 
 
 
 function makeGraph() {
     alert("all done!");
 
-    svg.selectAll("rect")
-    .data(dataSet)
-    .enter()
-    .append("rect")
-    .attr("x", function(d) {
-        return xScale(dateFn(d));
+    var points = svg.selectAll("rect")
+        .data(dataSet)
+        .enter()
+        .append("rect")
+        .attr("x", function(d) {
+            return xScale(dateFn(d));
+        })
+        .attr("y", function(d) {
+            return yScale(timeFn(d));
+        })
+        .attr("class", "point")
+        .attr("width","7px")
+        .attr("height","7px")
+        .style("fill", function(d) {
+            return colorFn(d);
+        });
+
+
+
+
+
+
+    d3.selectAll("rect").on("click", function(d) {
+
+        var currentObject = d.imgID;
+
+        // fade out any loaded image
+        $('img').fadeOut('1000');
+        //$('.imgWrapper').fadeOut('600');
+
+        // turn all non-clicked points white
+        d3.selectAll('rect').filter(function(d) {
+            return d.imgID != currentObject;
+        })
+        .transition()
+        .duration(100)
+        .style('opacity','0.5')
+        .style("fill", "white");
+
+
+        // show color of clicked point
+        d3.selectAll('rect').filter(function(d) {
+            return d.imgID == currentObject;
+        })
+        .transition()
+        .duration(100)
+        .style('opacity','1')
+        .style("fill", function(d) {
+            return colorFn(d);
+        });
+
+
+        // fade in colored div
+        $('.imgWrapper').css({"background-color": d.domColor, "height":$(window).height()});
+        $('.imgWrapper').fadeTo('500','.3')
+                        .delay('200')
+                        .fadeTo('500','.0');
+
+        
+
+        // fade in associated image
+        $('#' + d.imgID).fadeIn('1000');
     })
-    .attr("y", function(d) {
-        return xScale(timeFn(d));
-    })
-    .attr("width","10px")
-    .attr("height","10px")
-    .attr("fill","black")
-    .attr("transform", function() {
-        return "translate(" + margin.left + "," + margin.top + ")";
-    });
-}
+
+
+} // end of graph function
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* IMAGE PROCESSING */
 
 function loadImages(dir) {
 
@@ -60,23 +122,33 @@ function loadImages(dir) {
                 img.setAttribute('src', dir + filename);
                 img.setAttribute('id', filename.substring(5,7));
 
+                
 
                 // after image is loaded...
                 img.addEventListener('load', function() {
 
+
                     // add image to body
                     $('#images').append(img); 
 
-                    EXIF.getData(img, function() {
-                        var imageData = {};
+                    var imageData = {};
+                    var vibrant = new Vibrant(img);
+                    var swatches = vibrant.swatches();
+                    imageData.domColor = swatches.Vibrant.getHex();
 
+                    imageData.imgSrc = this.src;
+                    imageData.imgID = this.id;
+
+                    EXIF.getData(img, function() {
                         var dateTimeOriginal = EXIF.getTag(this, "DateTimeOriginal");
                         imageData.dateTaken = dateTimeOriginal.substring(0,10);
                         imageData.timeTaken = dateTimeOriginal.substring(11,19);
+                        
+
 
                         dataSet.push(imageData);
-
                         done();
+                        
                     });
                 })
                 });
@@ -98,32 +170,6 @@ function after(callback, count){
         }
     };
 }
-
-
-/*
-                    // get color data
-                    var vibrant = new Vibrant(img, 60, 5);
-                    var swatches = vibrant.swatches();
-
-                    // use even/odd to pick from swatches
-                    if (counter%2 == 0) {
-                        
-                        var dominantColor = swatches.Vibrant.getHex();
-                        //console.log("vibrant: " + dominantColor);
-
-                    } else {
-                        
-                        var dominantColor = swatches.LightVibrant.getHex();
-                        //console.log("light: " + dominantColor);
-
-                    }
-
-                    //var dominantColor = swatches.Vibrant.getHex();
-
-
-                    // add color to div
-                    $("#box" + id + counter).css("background-color", dominantColor);*/
-
 
 
 

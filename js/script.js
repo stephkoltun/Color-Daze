@@ -1,9 +1,7 @@
 var dataSet = [];
 
 
-
 function makeGraph() {
-    alert("all done!");
 
     var points = svg.selectAll("rect")
         .data(dataSet)
@@ -21,25 +19,6 @@ function makeGraph() {
         .style("fill", function(d) {
             return colorFn(d);
         });
-
-
-
-
- /*   d3.selectAll("rect").on("mouseover" , function(d) {
-        d3.select(this)
-            .style('opacity','1')
-            .style("fill", function(d) {
-            return colorFn(d);
-        });
-    })
-
-    d3.selectAll("rect").on("mouseout", function(d) {
-        d3.select(this)
-            .style('opacity','0.5')
-            .style("fill", "white");
-    })
-*/
-
 
 
     d3.selectAll("rect").on("click", function(d) {
@@ -152,10 +131,13 @@ function loadImages(dir) {
 
 
                 // for MAMP server
-                var filename = this.href.replace(window.location, "").replace("http:///", "");
+                //var filename = this.href.replace(window.location, "").replace("http:///", "");
 
-                // for live site
-                //var filename = this.href.replace(window.location.host, "").replace("http:///colordaze/", "");
+                // for live site - currently works
+                var filename = this.href.replace(window.location.host, "").replace("http:///colordaze", "");
+
+                // for live site - does not work
+                //var filename = this.href.replace(window.location.host + "/colordaze", "").replace("http:///","");
 
                 // load image
                 var img = document.createElement("img");

@@ -25,6 +25,21 @@ function makeGraph() {
 
 
 
+ /*   d3.selectAll("rect").on("mouseover" , function(d) {
+        d3.select(this)
+            .style('opacity','1')
+            .style("fill", function(d) {
+            return colorFn(d);
+        });
+    })
+
+    d3.selectAll("rect").on("mouseout", function(d) {
+        d3.select(this)
+            .style('opacity','0.5')
+            .style("fill", "white");
+    })
+*/
+
 
 
     d3.selectAll("rect").on("click", function(d) {
@@ -43,6 +58,31 @@ function makeGraph() {
         .duration(100)
         .style('opacity','0.5')
         .style("fill", "white");
+        
+
+        // toggle between color and white when hover
+        d3.selectAll('rect').filter(function(d) {
+            return d.imgID != currentObject;
+        })
+        .on("mouseover" , function(d) {
+            d3.select(this)
+            .transition()
+            .duration(100)
+            .style('opacity','1')
+            .style("fill", function(d) {
+                return colorFn(d);
+            });
+        })
+        .on("mouseout", function(d) {
+            d3.select(this)
+            .transition()
+            .duration(100)
+            .style('opacity','0.5')
+            .style("fill", "white");
+        });
+
+
+
 
 
         // show color of clicked point

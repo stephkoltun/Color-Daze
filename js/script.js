@@ -21,10 +21,10 @@ function generateColorBar(dir, id, date, loc, city) {
 
 
                 // for MAMP server
-                var filename = this.href.replace(window.location, "").replace("http:///", "");
+                //var filename = this.href.replace(window.location, "").replace("http:///", "");
 
                 // for live site
-                //var filename = this.href.replace(window.location.host, "").replace("http:///colordaze/", "");
+                var filename = this.href.replace(window.location.host, "").replace("http:///colordaze/", "");
                 
                 var counter = filename.substring(5,6);
 

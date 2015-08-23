@@ -1,3 +1,11 @@
+body {
+    font-family: arial, sans-serif;
+    font-size: 9px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
 
 
 
@@ -15,15 +23,16 @@ img {
     z-index: -100;
 }
 
-
-body {
-	font-family: arial, sans-serif;
-	font-size: 9px;
-	margin: 0;
-	padding: 0;
-	position: relative;
-    overflow: hidden;
+div.imgWrapper {
+    z-index: 5;
+    width: 100%;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
+
+
 
 .axis path,
 .axis line {
@@ -50,14 +59,17 @@ body {
     z-index: 10;
 }
 
-div.imgWrapper {
-    z-index: 5;
-    width: 100%;
-    display: none;
+#clock {
     position: absolute;
     top: 0;
-    left: 0;
+    z-index: 10;
 }
+
+.circle {
+    z-index: 10;
+}
+
+
 
 
 

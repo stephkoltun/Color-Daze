@@ -1,9 +1,66 @@
 var dataSet = [];
 
 
+
 function makeGraph() {
 
-    var points = svg.selectAll("rect")
+    alert("wahoo!");
+    
+
+    var clockGroup = clockSvg.append("g")
+        .attr("transform", "translate(" + outerRadius + "," + outerRadius + ")");
+
+    clockGroup.append("circle")
+        .attr("r", outerRadius)
+        .attr("class", "circle")
+        .attr("fill", "lightgrey")
+        .attr("stroke","black");
+
+    clockGroup.append("circle")
+        .attr("r", innerRadius)
+        .attr("fill", "white")
+        .attr("stroke","black");
+
+
+    var timePoints = clockGroup.selectAll("circle")
+        .data(dataSet)
+        .enter()
+        .append("circle")
+        .attr("r", 4)
+        .attr("cx", function (d,i) {
+            var alpha = (2 * Math.PI / dataSet.length) * i ;
+            return(scaleHours(timeFn(d)) * Math.cos(alpha - Math.PI / 2) )
+        })
+        .attr("cy", function (d,i) {
+            var alpha = (2 * Math.PI / dataSet.length) * i ;
+            return(scaleHours(timeFn(d)) * Math.sin(alpha - Math.PI / 2) )
+        })
+        .style("fill", function(d) {
+            return colorFn(d);
+        });
+
+    clockGroup.selectAll("rect.tick")
+        .data(d3.range(24))
+        .enter()
+        .append("svg:rect")
+        .attr("class", "tick")
+        .attr("x", -2)
+        .attr("y", -outerRadius)
+        .attr("width", 1)
+        .attr("height", 5)
+        .attr("transform", function(d, i){return "rotate("+(i*15)+")";})
+        .attr("fill", "black");
+
+}
+
+
+
+
+
+
+/*function makeGraph() {
+
+    var points = yearSvg.selectAll("rect")
         .data(dataSet)
         .enter()
         .append("rect")
@@ -92,7 +149,7 @@ function makeGraph() {
 } // end of graph function
 
 
-
+*/
 
 
 
@@ -176,8 +233,8 @@ function loadImages(dir) {
                 });
 
             var done = after(makeGraph, length);
-        }
-    });
+        } // end of success function
+    }); // end of AJAX functions
 }
 
 
@@ -188,6 +245,7 @@ function after(callback, count){
         if(++counter === count) {
             counter = 0;
 
+            console.log("about to make graph");
             callback();
         }
     };

@@ -2,6 +2,8 @@
 <head>
 	<title>Colordaze</title>
 	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="radar-chart.css">
+
 
 	
 	<!-- CDN Jquery -->
@@ -9,10 +11,13 @@
 	<!-- CDN Jquery UI -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
+	<!-- D3 visualization library -->
+	<script type="text/javascript" charset="utf-8" src="d3/d3.v3.js"></script>
 	<!-- Dominant Color -->
 	<script src="js/Vibrant.js"></script>
+	<!-- EXIF Data for Images -->
 	<script src="js/exif.js"></script>
-	<script type="text/javascript" charset="utf-8" src="d3/d3.v3.js"></script>
+	
 
 	<style>
 
@@ -32,6 +37,10 @@
 			<p class="credit">The site uses personal images from my travels and Jari Zwarts' <a href="http://jariz.github.io/vibrant.js/">Vibrant</a> javascript library.</p>
 		</section>
 	</header> -->
+	
+	<section id="clock">
+	</section>
+	
 	<section id="images">
 		<div class="imgWrapper">
 		</div>
@@ -40,6 +49,7 @@
 	<section id="plot">
 	</section>
 
+	
 	
 
 	<script type="text/javascript" src="js/render.js"></script>

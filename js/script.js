@@ -131,10 +131,10 @@ function loadImages(dir) {
 
 
                 // for MAMP server
-                //var filename = this.href.replace(window.location, "").replace("http:///", "");
+                var filename = this.href.replace(window.location, "").replace("http:///", "");
 
                 // for live site - currently works
-                var filename = this.href.replace(window.location.host, "").replace("http:///colordaze", "");
+                //var filename = this.href.replace(window.location.host, "").replace("http:///colordaze", "");
 
                 // for live site - does not work
                 //var filename = this.href.replace(window.location.host + "/colordaze", "").replace("http:///","");

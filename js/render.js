@@ -31,9 +31,9 @@ var scaleHours = d3.time.scale()
 				.domain([mintime, maxtime])
 				.range([0, 2 * pi]);
 
-//var scaleColors = d3.scale.linear()
-//				.domain([mincolor, maxcolor])
-//				.range([0, 2 * pi]);
+var scaleColors = d3.scale.linear()
+				.domain([0, 240])
+				.range([100, outerRadius]);
 
 
 
@@ -93,13 +93,13 @@ function makeGraph() {
             //var alpha = (2 * Math.PI / dataSet.length) * i ;
             //return (scaleHours(timeFn(d)) * Math.cos(alpha - Math.PI / 2) )
             //radius scale * Math.cos(angle)
-            return (outerRadius-25)*Math.cos(scaleHours(timeFn(d)));
+            return (scaleColors(d.domHue))*Math.cos(scaleHours(timeFn(d)));
         })
         .attr("y", function (d,i) {
             //var alpha = (2 * Math.PI / dataSet.length) * i ;
             //return (scaleHours(timeFn(d)) * Math.sin(alpha - Math.PI / 2) )
             // radial scale * Math.cos(angular scale)
-            return (outerRadius-25)*Math.sin(scaleHours(timeFn(d)));
+            return (scaleColors(d.domHue))*Math.sin(scaleHours(timeFn(d)));
         })
         .style("fill", function(d) {
             return colorFn(d);
@@ -128,8 +128,8 @@ function makeGraph() {
         .enter()
         .append("text")
         .attr("class", "label")
-        .attr("x", function(d, i){return (outerRadius+10)*Math.cos(i*0.26-1.57)})
-        .attr("y", function(d, i){return (outerRadius+10)*Math.sin(i*0.26-1.57)})
+        .attr("x", function(d, i){return (outerRadius+10)*Math.cos(i*0.26)})
+        .attr("y", function(d, i){return (outerRadius+10)*Math.sin(i*0.26)})
         .attr("fill", "blacke")
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "middle")
@@ -139,7 +139,10 @@ function makeGraph() {
 
     d3.selectAll(".clockPoint").on("click", function(d) {
 
+        console.log(d.domHue);
+
         var currentObject = d.imgID;
+        console.log(d.timeTaken);
 
         // fade out any loaded image
         $('img').fadeOut('1000');

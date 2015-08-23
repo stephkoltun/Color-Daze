@@ -40,12 +40,15 @@ function loadImages(dir) {
                     // add image to body
                     $('#images').append(img); 
 
-                    console.log(this.id);
+                    //console.log(this.id);
 
                     var imageData = {};
                     var vibrant = new Vibrant(img);
                     var swatches = vibrant.swatches();
                     imageData.domColor = swatches.Vibrant.getHex();
+                    imageData.domRGB = swatches.Vibrant.getRgb();
+
+                    imageData.domHue = constructColor(imageData.domRGB);
 
                     imageData.imgSrc = this.src;
                     imageData.imgID = this.id;
@@ -83,5 +86,64 @@ function after(callback, count){
     };
 }
 
+
+
+// http://shanfanhuang.com/blog/2014/8/11/sorting-colors
+// get
+// received rgb value
+function constructColor(colorObj){
+
+    var tempColor = {};
+
+    // Get the RGB values to calculate the Hue. 
+    var r = colorObj[0]/255;
+    var g = colorObj[1]/255;
+    var b = colorObj[2]/255;
+
+    
+    // Getting the Max and Min values for Chroma. 
+    var max = Math.max.apply(Math, [r, g, b]);
+    var min = Math.min.apply(Math, [r, g, b]);
+
+    // Variables for HSV value of hex color. 
+    var chr = max - min;
+    var hue = 0;
+    var val = max;
+    var sat = 0;
+
+    
+    if (val > 0) {
+        // Calculate Saturation only if Value isn't 0. 
+        sat = chr / val;
+        if (sat > 0) {
+            if (r == max) {
+                hue = 60 * (((g - min) - (b - min)) / chr);
+                if (hue < 0) {
+                    hue += 360;
+                }
+            } else if (g == max) {
+                hue = 120 + 60 * (((b - min) - (r - min)) / chr);
+            } else if (b == max) {
+                hue = 240 + 60 * (((r - min) - (g - min)) / chr);
+            }
+        }
+    }
+
+
+    tempColor.chroma = chr;
+    tempColor.hue = hue;
+    tempColor.sat = sat;
+    tempColor.val = val;
+    tempColor.luma = .3 * r + .59 * g + .11 * b
+    tempColor.red = r*255;
+    tempColor.green = g*255;
+    tempColor.blue = b*255;
+
+   
+    return tempColor.hue;
+
+    //going to be sorting by hue...
+
+}
 
 

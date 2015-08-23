@@ -1,176 +1,6 @@
 var dataSet = [];
 
 
-
-function makeGraph() {
-
-    alert("wahoo!");
-    
-
-    var clockGroup = clockSvg.append("g")
-        .attr("transform", "translate(" + outerRadius + "," + outerRadius + ")");
-
-    clockGroup.append("circle")
-        .attr("r", outerRadius)
-        .attr("class", "circle")
-        .attr("fill", "lightgrey")
-        .attr("stroke","black");
-
-    clockGroup.append("circle")
-        .attr("r", innerRadius)
-        .attr("fill", "white")
-        .attr("stroke","black");
-
-
-    var timePoints = clockGroup.selectAll("circle")
-        .data(dataSet)
-        .enter()
-        .append("circle")
-        .attr("r", 4)
-        .attr("cx", function (d,i) {
-            var alpha = (2 * Math.PI / dataSet.length) * i ;
-            return(scaleHours(timeFn(d)) * Math.cos(alpha - Math.PI / 2) )
-        })
-        .attr("cy", function (d,i) {
-            var alpha = (2 * Math.PI / dataSet.length) * i ;
-            return(scaleHours(timeFn(d)) * Math.sin(alpha - Math.PI / 2) )
-        })
-        .style("fill", function(d) {
-            return colorFn(d);
-        });
-
-    clockGroup.selectAll("rect.tick")
-        .data(d3.range(24))
-        .enter()
-        .append("svg:rect")
-        .attr("class", "tick")
-        .attr("x", -2)
-        .attr("y", -outerRadius)
-        .attr("width", 1)
-        .attr("height", 5)
-        .attr("transform", function(d, i){return "rotate("+(i*15)+")";})
-        .attr("fill", "black");
-
-}
-
-
-
-
-
-
-/*function makeGraph() {
-
-    var points = yearSvg.selectAll("rect")
-        .data(dataSet)
-        .enter()
-        .append("rect")
-        .attr("x", function(d) {
-            return xScale(dateFn(d));
-        })
-        .attr("y", function(d) {
-            return yScale(timeFn(d));
-        })
-        .attr("class", "point")
-        .attr("width","7px")
-        .attr("height","7px")
-        .style("fill", function(d) {
-            return colorFn(d);
-        });
-
-
-    d3.selectAll("rect").on("click", function(d) {
-
-        var currentObject = d.imgID;
-
-        // fade out any loaded image
-        $('img').fadeOut('1000');
-        //$('.imgWrapper').fadeOut('600');
-
-        // turn all non-clicked points white
-        d3.selectAll('rect').filter(function(d) {
-            return d.imgID != currentObject;
-        })
-        .transition()
-        .duration(100)
-        .style('opacity','0.5')
-        .style("fill", "white");
-        
-
-        // toggle between color and white when hover
-        d3.selectAll('rect').filter(function(d) {
-            return d.imgID != currentObject;
-        })
-        .on("mouseover" , function(d) {
-            d3.select(this)
-            .transition()
-            .duration(100)
-            .style('opacity','1')
-            .style("fill", function(d) {
-                return colorFn(d);
-            });
-        })
-        .on("mouseout", function(d) {
-            d3.select(this)
-            .transition()
-            .duration(100)
-            .style('opacity','0.5')
-            .style("fill", "white");
-        });
-
-
-
-
-
-        // show color of clicked point
-        d3.selectAll('rect').filter(function(d) {
-            return d.imgID == currentObject;
-        })
-        .transition()
-        .duration(100)
-        .style('opacity','1')
-        .style("fill", function(d) {
-            return colorFn(d);
-        });
-
-
-        // fade in colored div
-        $('.imgWrapper').css({"background-color": d.domColor, "height":$(window).height()});
-        $('.imgWrapper').fadeTo('500','.3')
-                        .delay('200')
-                        .fadeTo('500','.0');
-
-        
-
-        // fade in associated image
-        $('#' + d.imgID).fadeIn('1000');
-    })
-
-
-} // end of graph function
-
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* IMAGE PROCESSING */
 
 function loadImages(dir) {
@@ -209,6 +39,8 @@ function loadImages(dir) {
 
                     // add image to body
                     $('#images').append(img); 
+
+                    console.log(this.id);
 
                     var imageData = {};
                     var vibrant = new Vibrant(img);
@@ -250,14 +82,6 @@ function after(callback, count){
         }
     };
 }
-
-
-
-
-
-
-
-
 
 
 

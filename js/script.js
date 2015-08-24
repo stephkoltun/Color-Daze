@@ -139,11 +139,8 @@ function constructColor(colorObj){
     tempColor.green = g*255;
     tempColor.blue = b*255;
 
-   
-    return tempColor.hue;
-
     //going to be sorting by hue...
-
+    return tempColor.hue;
 }
 
 

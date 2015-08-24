@@ -90,16 +90,14 @@ function makeGraph() {
         .attr("width","7px")
         .attr("height","7px")
         .attr("x", function (d,i) {
-            //var alpha = (2 * Math.PI / dataSet.length) * i ;
-            //return (scaleHours(timeFn(d)) * Math.cos(alpha - Math.PI / 2) )
             //radius scale * Math.cos(angle)
-            return (scaleColors(d.domHue))*Math.cos(scaleHours(timeFn(d)));
+            //return (scaleColors(d.domHue))*Math.cos(scaleHours(timeFn(d)));
+            return (outerRadius-45)*Math.cos(scaleHours(timeFn(d)));
         })
         .attr("y", function (d,i) {
-            //var alpha = (2 * Math.PI / dataSet.length) * i ;
-            //return (scaleHours(timeFn(d)) * Math.sin(alpha - Math.PI / 2) )
             // radial scale * Math.cos(angular scale)
-            return (scaleColors(d.domHue))*Math.sin(scaleHours(timeFn(d)));
+            //return (scaleColors(d.domHue))*Math.sin(scaleHours(timeFn(d)));
+            return (outerRadius-45)*Math.sin(scaleHours(timeFn(d)));
         })
         .style("fill", function(d) {
             return colorFn(d);

@@ -16,13 +16,19 @@ mintime = timeFormat.parse("00:00:01"),
 maxtime = timeFormat.parse("23:59:59");
 
 //Create scale functions
-/*var xScale = d3.time.scale()
+var xScale = d3.time.scale()
 .domain([mindate, maxdate])
 .range([0, width]);
 
 var yScale = d3.time.scale()
 .domain([mintime, maxtime])
-.range([0, yearHeight]);*/
+.range([0, yearHeight]);
+
+
+// REVISED SETTING FOR TIME GRAPH
+var timeScale = d3.time.scale()
+.domain([mintime, maxtime])
+.range([0, width]);
 
 
 // SETTINGS FOR RADIAL PLOT
@@ -44,12 +50,17 @@ var timeFn = function(d) {return timeFormat.parse(d.timeTaken)};
 var colorFn = function(d) {return d.domColor};
 
 
-var yearSvg = d3.select("#plot")
+/*var yearSvg = d3.select("#plot")
             .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", yearHeight + margin.top + margin.bottom);
 
 var clockSvg = d3.select("#clock")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", clockHeight + margin.top + margin.bottom);*/
+
+var timeSvg = d3.select("#time")
             .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", clockHeight + margin.top + margin.bottom);
@@ -58,14 +69,140 @@ var clockSvg = d3.select("#clock")
 
 
 
-
-
-//var xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(12);
+var xAxis = d3.svg.axis().scale(timeScale).orient("bottom").ticks(12);
 //var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(12);
 
 
 
 
+
+// PURE TIME GRAPH
+
+
+function makeGraph() {
+
+    var bars = timeSvg.selectAll("rect")
+        .data(dataSet)
+        .enter()
+        .append("rect")
+        .attr("x", function(d) {
+            return timeScale(timeFn(d));
+        })
+        .attr("y", 10)
+        .attr("class", "bar")
+        .attr("width", function(d){
+            return (width/(24*60));
+        })
+        .attr("height",clockHeight)
+        .style("fill", function(d) {
+            return colorFn(d);
+        });
+
+
+
+
+    //Created AXES
+    var xAxisG = timeSvg.append("g")
+        .attr("class","axis")
+        .call(xAxis);
+
+
+    xAxisG.selectAll('text')
+        .attr("opacity","1")
+        .style("stroke-width", "1px");
+
+
+
+
+    /*d3.selectAll("rect").on("click", function(d) {
+
+        var currentObject = d.imgID;
+
+        // fade out any loaded image
+        $('img').fadeOut('1000');
+        //$('.imgWrapper').fadeOut('600');
+
+        // turn all non-clicked points white
+        d3.selectAll('rect').filter(function(d) {
+            return d.imgID != currentObject;
+        })
+        .transition()
+        .duration(100)
+        .style('opacity','0.5')
+        .style("fill", "white");
+        
+
+        // toggle between color and white when hover
+        d3.selectAll('rect').filter(function(d) {
+            return d.imgID != currentObject;
+        })
+        .on("mouseover" , function(d) {
+            d3.select(this)
+            .transition()
+            .duration(100)
+            .style('opacity','1')
+            .style("fill", function(d) {
+                return colorFn(d);
+            });
+        })
+        .on("mouseout", function(d) {
+            d3.select(this)
+            .transition()
+            .duration(100)
+            .style('opacity','0.5')
+            .style("fill", "white");
+        });
+
+
+
+
+
+        // show color of clicked point
+        d3.selectAll('rect').filter(function(d) {
+            return d.imgID == currentObject;
+        })
+        .transition()
+        .duration(100)
+        .style('opacity','1')
+        .style("fill", function(d) {
+            return colorFn(d);
+        });
+
+
+        // fade in colored div
+        $('.imgWrapper').css({"background-color": d.domColor, "height":$(window).height()});
+        $('.imgWrapper').fadeTo('500','.3')
+                        .delay('200')
+                        .fadeTo('500','.0');
+
+        
+
+        // fade in associated image
+        $('#' + d.imgID).fadeIn('1000');
+    })*/
+
+
+} // end of graph function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+// RADIAL GRAPH
 function makeGraph() {
 
     alert("wahoo!");
@@ -207,13 +344,15 @@ function makeGraph() {
 
 
 
-}//end of makeGraph()
+}//end of makeGraph()*/
 
 
 
 
 
 
+
+// LINEAR SCATTERPLOT GRAPH
 
 
 /*function makeGraph() {

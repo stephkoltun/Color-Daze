@@ -3,7 +3,7 @@
 	<title>Colordaze</title>
 	<link rel="stylesheet" href="styles.css">
 
-
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
 	
 	<!-- CDN Jquery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -26,20 +26,42 @@
 
 <body>
 
+	<header>
+		<div id="menuWrapper">
+		<ul id="viewMenu">
+			<li>view as:</li>
+			<li><button id="viewPoints">points /</button></li>
+			<li>clusters /</li>
+			<li>instances /</li>
+			<li>averages</li>
+		</ul>
+		<h1>A YEAR IN COLOR</h1>
+		<ul id="filterMenu">
+			<li>highlight:</li>
+			<li>date /</li>
+			<li>time /</li>
+			<li>color</li>
+		</ul>
+		</div>
+	</header>
+	
+	<section id="plot">
+	</section>
+
 	<section id="time">
 	</section>
 
+	
 
-	<section id="clock">
-	</section>
+	<!-- <section id="clock">
+	</section> -->
 	
 	<section id="images">
 		<div class="imgWrapper">
 		</div>
 	</section>
 
-	<!-- <section id="plot">
-	</section> -->
+	
 
 	
 	

@@ -67,7 +67,7 @@ function loadImages(dir) {
                 })
                 });
 
-            var done = after(makeGraph, length);
+            var done = after(makeInstanceGraph, length);
         } // end of success function
     }); // end of AJAX functions
 }
@@ -89,7 +89,6 @@ function after(callback, count){
 
 
 // http://shanfanhuang.com/blog/2014/8/11/sorting-colors
-// get
 // received rgb value
 function constructColor(colorObj){
 

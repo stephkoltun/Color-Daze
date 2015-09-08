@@ -1,11 +1,10 @@
 // set up graph area
 var margin = {top: 30, right: 30, bottom: 30, left: 30},
         width = $(window).width() - margin.left - margin.right,
-        yearHeight = 300 - margin.top - margin.bottom,
-        clockHeight = $(window).height() - margin.top - margin.bottom,
-        padding = 5
-        outerRadius = clockHeight / 2 - margin.top - margin.bottom;
-        innerRadius = 40;
+        height = $(window).height() - margin.top - margin.bottom,
+        padding = 5;
+        //outerRadius = clockHeight / 2 - margin.top - margin.bottom;
+        //innerRadius = 40;
 
 var format = d3.time.format("%Y:%m:%d"),
 mindate = format.parse("2013:01:01"),
@@ -22,7 +21,7 @@ var xScale = d3.time.scale()
 
 var yScale = d3.time.scale()
 .domain([mintime, maxtime])
-.range([0, yearHeight]);
+.range([0, height]);
 
 
 // REVISED SETTING FOR TIME GRAPH
@@ -32,14 +31,14 @@ var timeScale = d3.time.scale()
 
 
 // SETTINGS FOR RADIAL PLOT
-var pi = Math.PI;
+/*var pi = Math.PI;
 var scaleHours = d3.time.scale()
 				.domain([mintime, maxtime])
 				.range([0, 2 * pi]);
 
 var scaleColors = d3.scale.linear()
 				.domain([0, 240])
-				.range([100, outerRadius]);
+				.range([100, outerRadius]);*/
 
 
 
@@ -50,28 +49,34 @@ var timeFn = function(d) {return timeFormat.parse(d.timeTaken)};
 var colorFn = function(d) {return d.domColor};
 
 
-/*var yearSvg = d3.select("#plot")
-            .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", yearHeight + margin.top + margin.bottom);
 
-var clockSvg = d3.select("#clock")
-            .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", clockHeight + margin.top + margin.bottom);*/
 
 var timeSvg = d3.select("#time")
             .append("svg")
             .attr("width", width + margin.left + margin.right)
-            .attr("height", clockHeight + margin.top + margin.bottom);
+            .attr("height", height + margin.top + margin.bottom);
+
+var yearSvg = d3.select("#plot")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom);
+
+/*var clockSvg = d3.select("#clock")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", clockHeight + margin.top + margin.bottom);*/
 
 
 
+var timeXAxis = d3.svg.axis().scale(timeScale).orient("bottom").ticks(12);
+var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(12);
 
 
-var xAxis = d3.svg.axis().scale(timeScale).orient("bottom").ticks(12);
-//var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(12);
 
+d3.select("#viewPoints").on("click", function() {
+    alert("Regraphing");
+    makePointsGraph();
+});
 
 
 
@@ -79,7 +84,7 @@ var xAxis = d3.svg.axis().scale(timeScale).orient("bottom").ticks(12);
 // PURE TIME GRAPH
 
 
-function makeGraph() {
+function makeInstanceGraph() {
 
     var bars = timeSvg.selectAll("rect")
         .data(dataSet)
@@ -93,25 +98,52 @@ function makeGraph() {
         .attr("width", function(d){
             return (width/(24*60));
         })
-        .attr("height",clockHeight)
+        .attr("height",height)
         .style("fill", function(d) {
             return colorFn(d);
         });
 
 
-
-
     //Created AXES
     var xAxisG = timeSvg.append("g")
         .attr("class","axis")
-        .call(xAxis);
+        .call(timeXAxis);
 
 
     xAxisG.selectAll('text')
         .attr("opacity","1")
         .style("stroke-width", "1px");
 
+} // end of INSTANCES graph function
 
+
+
+
+
+
+
+
+// LINEAR SCATTERPLOT GRAPH
+
+
+function makePointsGraph() {
+
+    var points = yearSvg.selectAll("rect")
+        .data(dataSet)
+        .enter()
+        .append("rect")
+        .attr("x", function(d) {
+            return xScale(dateFn(d));
+        })
+        .attr("y", function(d) {
+            return yScale(timeFn(d));
+        })
+        .attr("class", "point")
+        .attr("width","7px")
+        .attr("height","7px")
+        .style("fill", function(d) {
+            return colorFn(d);
+        });
 
 
     /*d3.selectAll("rect").on("click", function(d) {
@@ -183,6 +215,9 @@ function makeGraph() {
 
 
 } // end of graph function
+
+
+
 
 
 
@@ -352,98 +387,4 @@ function makeGraph() {
 
 
 
-// LINEAR SCATTERPLOT GRAPH
 
-
-/*function makeGraph() {
-
-    var points = yearSvg.selectAll("rect")
-        .data(dataSet)
-        .enter()
-        .append("rect")
-        .attr("x", function(d) {
-            return xScale(dateFn(d));
-        })
-        .attr("y", function(d) {
-            return yScale(timeFn(d));
-        })
-        .attr("class", "point")
-        .attr("width","7px")
-        .attr("height","7px")
-        .style("fill", function(d) {
-            return colorFn(d);
-        });
-
-
-    d3.selectAll("rect").on("click", function(d) {
-
-        var currentObject = d.imgID;
-
-        // fade out any loaded image
-        $('img').fadeOut('1000');
-        //$('.imgWrapper').fadeOut('600');
-
-        // turn all non-clicked points white
-        d3.selectAll('rect').filter(function(d) {
-            return d.imgID != currentObject;
-        })
-        .transition()
-        .duration(100)
-        .style('opacity','0.5')
-        .style("fill", "white");
-        
-
-        // toggle between color and white when hover
-        d3.selectAll('rect').filter(function(d) {
-            return d.imgID != currentObject;
-        })
-        .on("mouseover" , function(d) {
-            d3.select(this)
-            .transition()
-            .duration(100)
-            .style('opacity','1')
-            .style("fill", function(d) {
-                return colorFn(d);
-            });
-        })
-        .on("mouseout", function(d) {
-            d3.select(this)
-            .transition()
-            .duration(100)
-            .style('opacity','0.5')
-            .style("fill", "white");
-        });
-
-
-
-
-
-        // show color of clicked point
-        d3.selectAll('rect').filter(function(d) {
-            return d.imgID == currentObject;
-        })
-        .transition()
-        .duration(100)
-        .style('opacity','1')
-        .style("fill", function(d) {
-            return colorFn(d);
-        });
-
-
-        // fade in colored div
-        $('.imgWrapper').css({"background-color": d.domColor, "height":$(window).height()});
-        $('.imgWrapper').fadeTo('500','.3')
-                        .delay('200')
-                        .fadeTo('500','.0');
-
-        
-
-        // fade in associated image
-        $('#' + d.imgID).fadeIn('1000');
-    })
-
-
-} // end of graph function
-
-
-*/

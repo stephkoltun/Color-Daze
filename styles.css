@@ -9,6 +9,64 @@ body {
 
 
 
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    text-align: center;
+    float: center;
+    margin: 0 auto;
+    padding: 0 auto;
+}
+
+#menuWrapper {
+    margin: 20px 100px 20px 100px;
+}
+
+header h1 {
+    font-size: 22px;
+    margin: 0 auto;
+    padding: 0 10px 0 10px;
+    float: left;
+    text-align: center;
+}
+
+header ul {
+    display: inline;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#viewMenu {
+    font-size: 14px;
+    float: left;
+}
+
+#viewMenu li {
+    padding-right: 5px;
+    display: inline;
+    float: left;
+}
+
+#filterMenu {
+    font-size: 14px;
+    float: right;
+}
+
+#filterMenu li {
+    padding-right: 5px;
+    display: inline;
+    float: left;
+}
+
+
+
+
+
 #images {
     height: 100vh;
     width: 100vh;
@@ -50,8 +108,8 @@ div.imgWrapper {
 
 
 #plot {
-    position: absolute;
-    bottom: 0;
+    /*position: absolute;
+    bottom: 0;*/
     z-index: 10;
 }
 
